@@ -100,8 +100,10 @@
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
-    // Start your code here
-    // You may move this JS to another file if you wish
+    const logButton = errorBtns[0];
+    logButton.addEventListener('click', () => {
+      console.log("You clicked me!");
+    });
   </script>
 </body>
 
