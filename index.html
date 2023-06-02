@@ -95,6 +95,15 @@
   </script>
 
   <script>
+    window.onerror = () => {
+      console.log("It seems there was an error when loading the page.")
+    }
+
+    console.log('I forgor a parens';
+  </script>
+
+
+  <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       try {
@@ -135,6 +144,7 @@
         this.name = "CountError";
       }
     }
+
 
     let count = 0; 
     logButton.addEventListener('click', () => {
