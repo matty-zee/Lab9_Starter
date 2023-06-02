@@ -95,11 +95,16 @@
   </script>
 
   <script>
-    window.onerror = () => {
-      console.log("It seems there was an error when loading the page.")
+    window.onerror = function(message, url, linenumber ){
+      console.log("JS error: " + message + " at line " + linenumber + " for " + url);
+      return true;
     }
 
-    console.log('I forgor a parens';
+
+  </script>
+
+  <script>
+        console.log('I forgor a parens';
   </script>
 
 
