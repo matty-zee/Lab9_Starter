@@ -87,23 +87,118 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "7eeb9570be4f471fb3847f731aa19147"
+    });
+  </script>
+
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
-      e.preventDefault();
-      let output = document.querySelector('output');
-      let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try {
+        e.preventDefault();
+        let output = document.querySelector('output');
+        let firstNum = document.querySelector('#first-num').value;
+        let secondNum = document.querySelector('#second-num').value;
+        let operator = document.querySelector('#operator').value;
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (error) {
+        console.error("Input Syntax Error Detected");
+      } finally {
+        console.log("Computation finished.")
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
     const logButton = errorBtns[0];
+    const errButton = errorBtns[1];
+    const cntButton = errorBtns[2];
+    const wrnButton = errorBtns[3];
+    const astButton = errorBtns[4];
+    const clrButton = errorBtns[5];
+    const dirButton = errorBtns[6];
+    const xmlButton = errorBtns[7];
+    const groupStart = errorBtns[8];
+    const groupEnd = errorBtns[9];
+    const tblButton = errorBtns[10];
+    const startTimer = errorBtns[11];
+    const endTimer = errorBtns[12];
+    const traceButton = errorBtns[13];
+    const globalErr = errorBtns[14];
+
+    class CountError extends Error{
+      constructor(message){
+        super(message);
+        this.name = "CountError";
+      }
+    }
+
+    let count = 0; 
     logButton.addEventListener('click', () => {
       console.log("You clicked me!");
     });
+
+    errButton.addEventListener('click', () => {
+      console.error("Oops there was an error :3");
+    });
+
+    cntButton.addEventListener('click', () => {
+      console.count();
+      if(count > 2){
+        throw new CountError("You pressed this button too many times!");
+      }
+      count = count + 1;
+    })
+
+    wrnButton.addEventListener('click', () => {
+      console.warn("I'm warning you...");
+    });
+
+    astButton.addEventListener('click', () => {
+      console.assert(2 + 2 == 3, "2+2 isn't 3 silly");
+    });
+
+    clrButton.addEventListener('click', () => {
+      console.clear();
+    });
+
+    dirButton.addEventListener('click', () => {
+      console.dir(document.location);
+    })
+
+    xmlButton.addEventListener('click', () => {
+      console.dirxml(document.location);
+    })
+
+    groupStart.addEventListener('click', () => {
+      console.group("Starting a group");
+    })
+
+    groupEnd.addEventListener('click', () => {
+      console.groupEnd();
+    })
+    tblButton.addEventListener('click', () => {
+      console.table(["one", "two", "three"]);
+    });
+
+    startTimer.addEventListener('click', () => {
+      console.time("Do stuff");
+    })
+
+    endTimer.addEventListener('click', () => {
+      console.timeEnd("Do stuff");
+    })
+
+    traceButton.addEventListener('click', () => {
+      console.trace(errorBtns);
+    })
+
+    globalErr.addEventListener('click', () => {
+      console.log(CausesError)
+    })
   </script>
 </body>
 
